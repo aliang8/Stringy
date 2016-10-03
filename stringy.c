@@ -1,0 +1,180 @@
+//Anthony Liang
+//Systems Work #1
+//09/28/2016
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//Function Headers
+int mystrlen(char *s);
+char* mystrcpy(char *dest, char *src);
+char* mystrncpy(char *dest, char *src, int n);
+char* mystrcat(char *dest, char *src);
+char* mystrncat(char *dest, char *src, int n);
+int mystrcmp(char *s1, char *s2);
+char* mytrchr(char *s, char c);
+char* mystrstr(char *s1, char *s2);
+
+int mystrlen(char *str) {
+  int i = 0;
+  while (*str) {
+    str++;
+    i++;
+  }
+  return i;
+}
+
+char* mystrcpy(char *dest, char *src) {
+  while (*src) {
+    *dest = *src;
+    dest++;
+    src++;
+  }
+  *(dest++) = 0; 
+  return dest;
+}
+
+char* mystrncpy(char *dest, char *src, int n){
+  char *ptr = dest;
+  int c = n;
+  while(*src && c != 0){
+      *dest = *src;
+      dest++;
+      src++;
+      c--;
+  }
+  *(dest++) = 0;
+  return ptr;
+}
+ 
+char* mystrcat(char *dest, char *src) {
+  char *ptr = dest;
+  while(*dest){
+    dest++;
+  }
+  while(*src){
+    *dest = *src;
+    dest++;
+    src++;
+  }
+  *(dest++) = 0;
+  return dest;
+}
+
+char* mystrncat (char *dest, char *src, int n){
+  char *ptr = dest;
+  int c = n;
+  while(*dest){
+    dest++;
+  }
+  while(*src && c != 0){
+    *dest = *src;
+    dest++;
+    src++;
+    c--;
+  }
+  *(dest++) = 0;
+  return ptr;
+}
+  
+int mystrcmp (char *s1, char *s2){
+   while(1){
+     if(*s1 || *s2){
+       if(*s1 == *s2){ s1++; s2++;
+       } else { 
+	 return *s1 - *s2;
+       }
+     } else {
+       return 0;
+     } 
+   }
+}
+
+char* mystrchr(char *s, char c){
+  while(*s){
+    if(*s == c){
+      return s;
+    }
+    s++;
+  }
+  return NULL;
+}
+
+char* mystrstr(char *s1, char *s2){
+  while(*s1){
+    char *begin = s1;
+    char *substr = s2;
+    while(*s1 && *substr && *s1 == *substr){
+      s1++;
+      substr++;
+    }
+    if(!*substr){
+      return begin;
+    }
+    s1 = begin + 1;
+  }
+  return NULL;
+}
+	
+int main(){
+  char s1[] = "C Programming";
+  char s2[] = "";
+
+  printf("Testing mystrlen function:\n");
+  printf("s1 = %s, length = %i \n", s1, mystrlen(s1));
+  printf("s2 =  , length = 0 \n \n");
+
+  printf("Testing mystrcpy function:\n");
+  printf("Copy s1 to s2: s2 = %s \n \n", mystrcpy(s2,s1));
+
+  char s3[] = "Systems";
+
+  printf("Testing strcmp: \n");
+  printf("s1 = %s, s2 = %s, s3 = %s \n", s1, s2, s3);
+  printf("Compare s1 to s2: %i \n", mystrcmp(s1,s2));
+  printf("Compare s2 to s1: %i \n", mystrcmp(s2,s1));
+  printf("Compare s3 to s3: %i \n \n", mystrcmp(s3,s3));
+
+  char s4[] = "Hello123";
+  char c = '1';
+  char c2 = '0';
+  printf("Testing mystrchr function: \n");
+  printf("s4 = %s, c = %c, c2 = %c \n", s4, c, c2);
+  printf("Looking for |%c| in %s: [%s]\n", c, s4, mystrchr(s4,c));
+  printf("Looking for |%c| in %s: [%s]\n \n", c2, s4, mystrchr(s4,c2));
+ 
+  char s5[] = "abcdefgh";
+  char s6[] = "cde";
+  char s7[] = "xyz";
+  printf("Testing mystrstr function: \n");
+  printf("s5 = %s, s6 = %s, s7 = %s \n", s5, s6, s7);
+  printf("Looking for |%s| in %s: [%s]\n", s6, s5, mystrstr(s5,s6));
+  printf("Looking for |%s| in %s: [%s]\n \n", s7, s5, mystrstr(s5,s7));
+  
+  char s8[] = "This is computer science";
+  char s9[] = "";
+  int num = 5;
+  int num2 = 28;
+  printf("Testing mystrncpy function: \n");
+  printf("s8 = %s, s9 = %s, num = %i, num2 = %i \n", s8, s9, num, num2);
+  printf("s8 = %s, length = %i \n", s8, mystrlen(s8));
+  printf("Copying %i characters from s8 to s9: %s \n", num, mystrncpy(s9,s8,num));
+  printf("Copying %i characters from s8 to s9: %s \n \n", num2, mystrncpy(s9,s8,num2));
+ 
+  char s10[] = "I hate college apps";
+  char s11[] = " ughhhhh. So done.";
+  int num3 = 6;
+  int num4 = 20;
+  printf("Testing mystrncat function: \n");
+  printf("s10 = %s, s11 = %s, num3 = %i, num4 = %i \n", s10, s11, num3, num4);
+  printf("Cat %i characters from s11 to s10: %s \n", num3, mystrncat(s10,s11,num3));  
+  printf("Cat %i characters from s11 to s10: %s \n \n", num4, mystrncat(s10,s11,num4)); 
+  
+
+  //This is malfunctioning wth?
+  char s12[] = "Mr.Robot is ";
+  char s13[] = "awesome";
+  printf("Cat s13 to s12: %s \n", mystrcat(s12,s13));
+  return 0;
+}
