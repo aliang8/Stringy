@@ -26,12 +26,13 @@ int mystrlen(char *str) {
 }
 
 char* mystrcpy(char *dest, char *src) {
+  char *ptr = dest;
   while (*src) {
     *dest = *src;
     dest++;
     src++;
   }
-  return dest;
+  return ptr;
 }
 
 char* mystrncpy(char *dest, char *src, int n){
@@ -43,7 +44,7 @@ char* mystrncpy(char *dest, char *src, int n){
       src++;
       c--;
   }
-  *(dest++) = 0;
+  *(ptr++) = 0;
   return ptr;
 }
  
@@ -58,7 +59,7 @@ char* mystrcat(char *dest, char *src) {
     src++;
   }
   *(dest++) = 0;
-  return dest;
+  return ptr;
 }
 
 char* mystrncat (char *dest, char *src, int n){
