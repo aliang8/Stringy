@@ -28,8 +28,8 @@ int mystrlen(char *str) {
 char* mystrcpy(char *dest, char *src) {
   char *ptr = dest;
   while (*src) {
-    *ptr = *src;
-    ptr++;
+    *dest = *src;
+    dest++;
     src++;
   }
   return ptr;

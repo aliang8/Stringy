@@ -171,8 +171,6 @@ int main(){
   printf("Cat %i characters from s11 to s10: %s \n", num3, mystrncat(s10,s11,num3));  
   printf("Cat %i characters from s11 to s10: %s \n \n", num4, mystrncat(s10,s11,num4)); 
   
-
-  //This is malfunctioning wth?
   char s12[] = "Mr.Robot is ";
   char s13[] = "awesome";
   printf("Cat s13 to s12: %s \n", mystrcat(s12,s13));
